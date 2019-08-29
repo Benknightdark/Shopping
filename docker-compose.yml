@@ -1,5 +1,6 @@
 version: '3.1'
 services:
+#-------------For Message Bus--------------- #
   redis:
     image: 'redis:latest'
     ports:
@@ -10,7 +11,7 @@ services:
             - redisdb:/var/lib/redis 
     restart: always
 
-#--------------------------------- #
+#-----------For Business DB, Event Store and Query DB----------------- #
 
   mongo:
     image: mongo
@@ -22,7 +23,7 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: example
     volumes:
             - mongodb:/data/db
-#--------------------------------- #
+#------------DB Exporer--------------------- #
 
   mongo-express:
     image: mongo-express
@@ -32,7 +33,7 @@ services:
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: example
-#--------------------------------- #
+#-------------Persistent Volumes-------------------- #
 
 volumes:
   mongodb:     
