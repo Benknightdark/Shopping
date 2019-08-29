@@ -33,6 +33,16 @@ services:
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: example
+ #---------------------Web Api -----------------------#     
+  webapi:
+     build: ./webapi
+     ports:
+      - 4000:3000
+     environment:
+        NODE_ENV: production
+        mongoDBConnection: mongodb://root:example@mongo
+     depends_on:
+      - mongo
 #-------------Persistent Volumes-------------------- #
 
 volumes:
