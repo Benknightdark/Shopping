@@ -1,7 +1,7 @@
 version: '3.1'
 services:
 #-------------For Message Bus--------------- #
-  redis:
+  redis-message-bus:
     image: 'redis:latest'
     ports:
     - "1769:6379"
@@ -41,8 +41,22 @@ services:
      environment:
         NODE_ENV: production
         mongoDBConnection: mongodb://root:example@mongo
+        redisConnection: redis://redis-message-bus
      depends_on:
       - mongo
+      - redis-message-bus   
+#---------------------Command Bus -----------------------#     
+  command-bus:
+     build: ./command-bus
+     ports:
+      - 4001:3001
+     environment:
+        NODE_ENV: production
+        mongoDBConnection: mongodb://root:example@mongo
+        redisConnection: redis://redis-message-bus
+     depends_on:
+      - mongo
+      - redis-message-bus      
 #-------------Persistent Volumes-------------------- #
 
 volumes:
