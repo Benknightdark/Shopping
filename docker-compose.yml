@@ -1,6 +1,6 @@
 version: '3.1'
 services:
-#-------------For Message Bus--------------- #
+#-------------MessageBus--------------- #
   redis-message-bus:
     image: 'redis:latest'
     ports:
@@ -21,7 +21,7 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: example
     volumes:
             - mongodb:/data/db
-#------------DB Exporer--------------------- #
+#------------MongoDB網頁版管理系統--------------------- #
   mongo-express:
     image: mongo-express
     restart: always
