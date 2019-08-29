@@ -1,5 +1,17 @@
 version: '3.1'
 services:
+  redis:
+    image: 'redis:latest'
+    ports:
+    - "1769:6379"
+    environment:
+      - appendonly=yes
+    volumes:
+            - redisdb:/var/lib/redis 
+    restart: always
+
+#--------------------------------- #
+
   mongo:
     image: mongo
     restart: always
@@ -10,6 +22,8 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: example
     volumes:
             - mongodb:/data/db
+#--------------------------------- #
+
   mongo-express:
     image: mongo-express
     restart: always
@@ -18,5 +32,8 @@ services:
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: example
+#--------------------------------- #
+
 volumes:
-  mongodb:         
+  mongodb:     
+  redisdb:      
