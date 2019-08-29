@@ -10,9 +10,7 @@ services:
     volumes:
             - redisdb:/var/lib/redis 
     restart: always
-
 #-----------For Business DB, Event Store and Query DB----------------- #
-
   mongo:
     image: mongo
     restart: always
@@ -24,7 +22,6 @@ services:
     volumes:
             - mongodb:/data/db
 #------------DB Exporer--------------------- #
-
   mongo-express:
     image: mongo-express
     restart: always
@@ -58,7 +55,6 @@ services:
       - mongo
       - redis-message-bus      
 #-------------Persistent Volumes-------------------- #
-
 volumes:
   mongodb:     
   redisdb:      
