@@ -2,6 +2,7 @@
 # 應用程式簡介
 - 使用CQRS設計模式建立網購應用程式
 # 應用程式組成
+- Core
 - WebSite
 - WebApi
 - CommandBus
