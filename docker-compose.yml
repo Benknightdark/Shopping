@@ -30,15 +30,17 @@ services:
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: example
- #---------------------Web Api -----------------------#     
+#---------------------Web Api -----------------------#     
   webapi:
      build: ./webapi
      ports:
       - 4000:3000
-     environment:
-        NODE_ENV: production
-        mongoDBConnection: mongodb://root:example@mongo
-        redisConnection: redis://redis-message-bus
+     env_file:
+     - ./docker-compose.env  
+    #  environment:
+    #     NODE_ENV: production
+    #     mongoDBConnection: mongodb://root:example@mongo
+    #     redisConnection: redis://redis-message-bus
      depends_on:
       - mongo
       - redis-message-bus   
@@ -47,10 +49,12 @@ services:
      build: ./command-bus
      ports:
       - 4001:3001
-     environment:
-        NODE_ENV: production
-        mongoDBConnection: mongodb://root:example@mongo
-        redisConnection: redis://redis-message-bus
+     env_file:
+      - ./docker-compose.env    
+    #  environment:
+    #     NODE_ENV: production
+    #     mongoDBConnection: mongodb://root:example@mongo
+    #     redisConnection: redis://redis-message-bus
      depends_on:
       - mongo
       - redis-message-bus      
