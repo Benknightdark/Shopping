@@ -1,5 +1,5 @@
 import * as mongoose from 'mongoose';
-import { mongoDBConnection } from 'src/config/Environment';
+import { mongoDBConnection } from '../config/Environment';
 
 export const databaseProviders = [
   {

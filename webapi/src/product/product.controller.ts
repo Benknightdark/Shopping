@@ -2,6 +2,7 @@ import { Controller, Post, Body, Get } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { ProductDto } from './dto/product-dto';
 import { IProduct } from './interfaces/product-interface';
+import { Observable } from 'rxjs';
 
 @Controller('product')
 export class ProductController {
@@ -13,7 +14,7 @@ export class ProductController {
     }
 
     @Get()
-    async findAll(): Promise<IProduct[]> {
+     findAll(): Observable<IProduct[]> {
         return this.productService.findAll();
     }
 }
