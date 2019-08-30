@@ -7,16 +7,16 @@ import { Observable, of, from } from 'rxjs';
 @Injectable()
 export class ProductService {
 
-    constructor(@Inject('PRODUCT_MODEL') private readonly catModel: Model<IProduct>) { }
+    constructor(@Inject('PRODUCT_MODEL') private readonly productModel: Model<IProduct>) { }
 
     create(createCatDto: ProductDto): Observable<IProduct> {
-        const createdProduct = new this.catModel(createCatDto);
+        const createdProduct = new this.productModel(createCatDto);
         const $createdCat = from(createdProduct.save());
         return $createdCat;
     }
 
     findAll(): Observable<IProduct[]> {
-        const data = from(this.catModel.find().exec());
+        const data = from(this.productModel.find().exec());
         return data;
     }
 }
