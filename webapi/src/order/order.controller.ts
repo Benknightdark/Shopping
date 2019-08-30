@@ -1,71 +1,46 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Post, Body, Put, Delete, Get, Param } from '@nestjs/common';
+import { OrderService } from './order.service';
+import { OrderDTO } from './dto/order-dto';
+import { Observable } from 'rxjs';
+import { IOrder } from './interfaces/order-interface';
 
 @Controller('order')
 export class OrderController {
-    constructor(private readonly productService: ProductService) { }
-    /**
-     * 新增資料
-     *
-     * @param {ProductDto} createProductDto
-     * @returns {Observable<IProduct>}
-     * @memberof ProductController
-     */
+    constructor(private readonly orderService: OrderService) { }
+
     @Post()
-    create(@Body() createProductDto: ProductDto): Observable<IProduct> {
-        const data = this.productService.create(createProductDto);
+    create(@Body() createProductDto: OrderDTO): Observable<IOrder> {
+        const data = this.orderService.create(createProductDto);
         return data;
     }
 
-    /**
-     *
-     * 更新資料
-     * @param {string} id
-     * @param {ProductDto} createProductDto
-     * @returns {Observable<number>}
-     * @memberof ProductController
-     */
+
     @Put(':id')
-    update(@Param('id') id: string, @Body() createProductDto: ProductDto): Observable<number> {
-        const data = this.productService.update(id, createProductDto);
+    update(@Param('id') id: string, @Body() createProductDto: OrderDTO): Observable<number> {
+        const data = this.orderService.update(id, createProductDto);
         return data;
     }
 
-    /**
-     *
-     * 刪除資料
-     * @param {string} id
-     * @memberof ProductController
-     */
+
     @Delete(':id')
     async delete(@Param('id') id: string) {
-        this.productService.deleteById(id);
+        this.orderService.deleteById(id);
     }
     @Delete()
     async deleteAll() {
-        this.productService.deleteAll();
+        this.orderService.deleteAll();
     }
 
-    /**
-     * 取得全部資料
-     *
-     * @returns {Observable<IProduct[]>}
-     * @memberof ProductController
-     */
+
     @Get()
-    findAll(): Observable<IProduct[]> {
-        return this.productService.findAll();
+    findAll(): Observable<IOrder[]> {
+        return this.orderService.findAll();
     }
 
 
-    /**
-     *
-     * 取得指定id的資料
-     * @param {string} id
-     * @returns {Observable<IProduct>}
-     * @memberof ProductController
-     */
+
     @Get(':id')
-    findById(@Param('id') id: string): Observable<IProduct> {
-        return this.productService.findById(id);
+    findById(@Param('id') id: string): Observable<IOrder> {
+        return this.orderService.findById(id);
     }
 }

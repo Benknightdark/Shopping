@@ -7,6 +7,6 @@ export const orderSchema = new mongoose.Schema(
      productName: String,
      count: Number,
      price: Number,
-     orderStatus: OrderStatus
+     orderStatus: String
     }
 );

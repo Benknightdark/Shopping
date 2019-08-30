@@ -7,27 +7,30 @@ import { Model, Document } from 'mongoose';
 
 @Injectable()
 export class OrderService implements IService<IOrder, OrderDTO>{
-    constructor(@Inject('ORDER_MODEL') private readonly productModel: Model<IOrder>) { }
 
-    create(createCatDto: OrderDTO): Observable<IOrder> {
-        const $createdCat = from(new this.productModel(createCatDto).save());
+    constructor(@Inject('ORDER_MODEL') private readonly orderModel: Model<IOrder>) { }
+    deleteById(id: string): void {
+        this.orderModel.findByIdAndDelete(id).exec();
+    }
+    create(ordertDto: OrderDTO): Observable<IOrder> {
+        const $createdCat = from(new this.orderModel(ordertDto).save());
         return $createdCat;
     }
     update(id: string, createCatDto: OrderDTO): Observable<number> {
-        const isUpdate = from(this.productModel.findById(id).update(createCatDto).exec());
+        const isUpdate = from(this.orderModel.findById(id).update(createCatDto).exec());
 
         return isUpdate;
     }
     findAll(): Observable<IOrder[]> {
-        const data = from(this.productModel.find().exec());
+        const data = from(this.orderModel.find().exec());
         return data;
     }
     findById(id: string): Observable<IOrder> {
-        const data = from(this.productModel.findById(id).exec());
+        const data = from(this.orderModel.findById(id).exec());
         return data;
     }
     deleteAll(): void {
-        this.productModel.deleteMany({}).exec();
+        this.orderModel.deleteMany({}).exec();
     }
 }
 
