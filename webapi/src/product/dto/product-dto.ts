@@ -5,6 +5,6 @@
  * @class ProductDto
  */
 export class ProductDto {
-    readonly productName: string;
-    readonly price: number;
+     productName: string;
+     price: number;
 }
