@@ -4,6 +4,7 @@ WORKDIR /tmp/
 COPY package.json package-lock.json tsconfig.json ./
 COPY ./ ./
 RUN npm install
+RUN npm run test
 RUN npm run build
 
 # install production packages
