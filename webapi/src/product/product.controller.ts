@@ -5,15 +5,15 @@ import { IProduct } from './interfaces/product-interface';
 
 @Controller('product')
 export class ProductController {
-    constructor(private readonly catsService: ProductService) {}
+    constructor(private readonly productService: ProductService) { }
 
     @Post()
-    async create(@Body() createCatDto: ProductDto) {
-      this.catsService.create(createCatDto);
+    async create(@Body() createProductDto: ProductDto) {
+        this.productService.create(createProductDto);
     }
-  
+
     @Get()
     async findAll(): Promise<IProduct[]> {
-      return this.catsService.findAll();
+        return this.productService.findAll();
     }
 }
